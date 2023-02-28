@@ -28,8 +28,8 @@
         var camera = new BABYLON.FreeCamera("camera", new BABYLON.Vector3(0, 0, -10), scene);
         var light = new BABYLON.PointLight("light", new BABYLON.Vector3(10, 10, 0), scene);
         
-        const sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {}, scene);
-        const box = BABYLON.MeshBuilder.CreateBox("box", 2, scene)
+        const sphere = BABYLON.Mesh.CreateSphere("sphere", 5 , scene);
+        const box = BABYLON.Mesh.CreateBox("box", 2, scene)
 
 
         var renderLoop = function () {
