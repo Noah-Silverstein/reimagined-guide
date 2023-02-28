@@ -59,10 +59,11 @@
             seconds += 1;
         }
 
-        //init gameloop to update every second
-        setInterval(updategameloop, 1000);
         //init renderloop 
         engine.runRenderLoop(renderLoop);
+        
+        //init gameloop to update every second
+        setInterval(updategameloop, 1000);
     </script>
   </body>
 </html>
