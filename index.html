@@ -44,22 +44,23 @@
         box.position.x = 5;
         
         let startTime = performance.now()	//calculate start time 
-        let updatesPerSecond = 1;
-        let nextUpdate = startTime
-        let currentTime = startTime
-        let skipTicks = 1000;
-
+        let tickSpeed = 1; //increment per 1 second
+       
         let t = 0;
         let seconds = 0;
         
         function updateGame(){
+            //this block of code will 
             currentTime = performance.now()
             let ellapsedTime = (currentTime - startTime) / 1000
-            if (ellapsedTime >= 2){
+            if (ellapsedTime >= tickSpeed){
+                //here is where you want to put the game logic that increments per second
                 ++seconds
                 console.log("update tick at second " + seconds);
                 startTime = performance.now()
+                sphere.rotation.x = t 
             }
+
             t += 0.1
             box.rotation.y = t * 0.1;
             sphere.rotation.x = t 
