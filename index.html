@@ -35,6 +35,16 @@
         boxMaterial.emissiveColor = new BABYLON.Color3(0, 0.58, 0.86);
         box.material = boxMaterial;
 
+        const torus = BABYLON.Mesh.CreateTorus("torus", 2, 0.5, 15, scene);
+        torus.position.x = -5;
+        torus.rotation.x = 1.5;
+
+        const torusMaterial = new BABYLON.StandardMaterial("material", scene);
+        torusMaterial.emissiveColor = new BABYLON.Color3(0.4, 0.4, 0.4);
+        torus.material = torusMaterial;
+
+
+
         var renderLoop = function () {
             scene.render();
         };
