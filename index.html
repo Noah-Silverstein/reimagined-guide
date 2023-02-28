@@ -37,12 +37,16 @@
         box.position.x = 5;
 
         let t = 0;
+        //you should render as much as possible 
         var renderLoop = function () {
             scene.render();
             t -= 0.1 //increments every rendered frame at 60/frames a second ticks 60 times a second
             box.rotation.y = t * 2;
-
+            sphere.rotation.x = t 
+            console.log("render tick: " + t);
         };
+        //for updating materials you should update every second
+        
         engine.runRenderLoop(renderLoop);
     </script>
   </body>
