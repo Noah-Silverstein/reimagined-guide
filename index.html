@@ -53,7 +53,15 @@
             console.log("render tick: " + t);
         };
         //for updating materials you should update every second
-        
+        let seconds = 0
+        var updateGameLoop = function() {
+            console.log("update gameloop: " +  seconds);
+            seconds += 1;
+        }
+
+        //init gameloop to update every second
+        setInterval(updategameloop, 1000);
+        //init renderloop 
         engine.runRenderLoop(renderLoop);
     </script>
   </body>
