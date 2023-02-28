@@ -29,9 +29,16 @@
         var light = new BABYLON.PointLight("light", new BABYLON.Vector3(10, 10, 0), scene);
         
         const sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 5} , scene);
+
+        //create a bump map
+        var mat0 = new BABYLON.StandardMaterial("mat0", scene);
+	    mat0.diffuseColor = new BABYLON.Color3(1, 0, 0);
+	    mat0.bumpTexture = new BABYLON.Texture("https://i.imgur.com/wGyk6os.png", scene);
+
+        sphere.material = mat0;
+
         const box = BABYLON.MeshBuilder.CreateBox("box", {width: 3, depth: 4, height: 2}, scene);
 
-        
         box.rotation.x = -0.3;
         box.rotation.y = -0.5;
         box.position.x = 5;
