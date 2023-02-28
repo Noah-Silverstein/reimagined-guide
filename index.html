@@ -42,24 +42,36 @@
         box.rotation.x = -0.3;
         box.rotation.y = -0.5;
         box.position.x = 5;
+        
+        let startTime = performance.now()	//calculate start time 
+        let updatesPerSecond = 1;
+        let nextUpdate = startTime
+        let currentTime = startTime
+        let skipTicks = 1000;
 
         let t = 0;
         let seconds = 0;
         
         function updateGame(){
+            currentTime = performance.now()
+            let ellapsedTime = currentTime - startTime
+            if (ellapsedTime => 1000){
+                ++seconds
+                console.log("update tick at second " + seconds);
+                startTime = performance.now()
+            }
             t += 0.1
             box.rotation.y = t * 0.1;
             sphere.rotation.x = t 
-            console.log("update tick before render new version " + t);
         }
-
+        
         function renderLoop(){
             scene.render();
         }
-
-        scene.registerBeforeRender(updateGame)
+        //not sure how these 2 interact.
+        scene.registerBeforeRender(updateGame) //render only for specific scene but before every render i guess not sure
            
-        engine.runRenderLoop(renderLoop);
+        engine.runRenderLoop(renderLoop); //continously render whatever you need to i guess
 
     </script>
   </body>
