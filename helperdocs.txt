@@ -1,1 +1,7 @@
+Basic shape demo for babylon
 https://developer.mozilla.org/en-US/docs/Games/Techniques/3D_on_the_web/Building_up_a_basic_demo_with_Babylon.js?utm_campaign
+
+Using lighting
+https://forum.babylonjs.com/t/best-way-to-create-part-of-a-mesh-that-acts-as-a-light-source/16431/6
+https://playground.babylonjs.com/#WJWSNL
+

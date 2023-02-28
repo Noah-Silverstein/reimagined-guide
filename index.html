@@ -30,12 +30,18 @@
         
         const sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 5} , scene);
         const box = BABYLON.MeshBuilder.CreateBox("box", {width: 3, depth: 4, height: 2}, scene);
+
+        
         box.rotation.x = -0.3;
         box.rotation.y = -0.5;
         box.position.x = 5;
 
+        let t = 0;
         var renderLoop = function () {
             scene.render();
+            t -= 0.1 //increments every rendered frame at 60/frames a second ticks 60 times a second
+            box.rotation.y = t * 2;
+
         };
         engine.runRenderLoop(renderLoop);
     </script>
