@@ -44,9 +44,27 @@
         box.position.x = 5;
 
         let t = 0;
+        let seconds = 0;
+        
+        function updateGame(){
+            box.rotation.y = t * 0.1;
+            sphere.rotation.x = t 
+            console.log("update tick before render " + t);
+        }
+
+        function renderLoop(){
+            scene.render();
+        }
+
+        scene.registerBeforeRender(updateGame)
+           
+        engine.runRenderLoop(renderLoop);
+
+        /*
         //you should render as much as possible 
         var renderLoop = function () {
             scene.render();
+            
             t -= 0.1 //increments every rendered frame at 60/frames a second ticks 60 times a second
             box.rotation.y = t * 0.1;
             sphere.rotation.x = t 
@@ -61,7 +79,7 @@
         }
         */
         //init renderloop 
-        engine.runRenderLoop(renderLoop);
+        //engine.runRenderLoop(renderLoop);
         
         //init gameloop to update every second
         //setInterval(updategameloop, 1000);

@@ -5,3 +5,5 @@ Using lighting
 https://forum.babylonjs.com/t/best-way-to-create-part-of-a-mesh-that-acts-as-a-light-source/16431/6
 https://playground.babylonjs.com/#WJWSNL
 
+Difference between callbeforerender and renderscene
+https://forum.babylonjs.com/t/whats-the-difference-between-runrenderloop-and-registerbeforerender/38131
