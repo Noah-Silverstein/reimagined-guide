@@ -54,8 +54,8 @@
         
         function updateGame(){
             currentTime = performance.now()
-            let ellapsedTime = currentTime - startTime
-            if (ellapsedTime => 1000){
+            let ellapsedTime = (currentTime - startTime) / 1000
+            if (ellapsedTime >= 2){
                 ++seconds
                 console.log("update tick at second " + seconds);
                 startTime = performance.now()
