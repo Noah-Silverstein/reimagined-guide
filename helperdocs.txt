@@ -7,3 +7,11 @@ https://playground.babylonjs.com/#WJWSNL
 
 Difference between callbeforerender and renderscene
 https://forum.babylonjs.com/t/whats-the-difference-between-runrenderloop-and-registerbeforerender/38131
+
+check out this camera // adding scrolling on mouse location possibly and other things in the future
+https://playground.babylonjs.com/#3B5W22#29
+https://doc.babylonjs.com/features/featuresDeepDive/cameras/camera_introduction
+
+
+
+https://stackoverflow.com/questions/21120885/rotating-earth-around-sun

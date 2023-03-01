@@ -28,23 +28,32 @@
         var camera = new BABYLON.FreeCamera("camera", new BABYLON.Vector3(0, 0, -10), scene);
         var light = new BABYLON.PointLight("light", new BABYLON.Vector3(10, 10, 0), scene);
         
-        const sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 5} , scene);
+        const earth = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 5} , scene);
+        var earthMaterial = new BABYLON.StandardMaterial("material", scene);
+        earthMaterial.emissiveColor = new BABYLON.Color3(0, 0.58, 0.86);
+        earth.material = earthMaterial;
 
-        //create a bump map
-        var mat0 = new BABYLON.StandardMaterial("mat0", scene);
-	    mat0.diffuseColor = new BABYLON.Color3(1, 0, 0);
-	    mat0.bumpTexture = new BABYLON.Texture("https://i.imgur.com/wGyk6os.png", scene);
+        const moon = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 2} , scene);
+        var moonMaterial = new BABYLON.StandardMaterial("material", scene);
+        moonMaterial.emissiveColor = new BABYLON.Color3(0, 0, 0);
+        moon.material = moonMaterial;
 
-        sphere.material = mat0;
+        const sun = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 10} , scene);
+        var sunMaterial = new BABYLON.StandardMaterial("material", scene);
+        sunMaterial.emissiveColor = new BABYLON.Color3(0.255, 0, 0.255);
+        sun.material = sunMaterial;
 
-        const box = BABYLON.MeshBuilder.CreateBox("box", {width: 3, depth: 4, height: 2}, scene);
+        earth.position.x = 5; 
 
-        box.rotation.x = -0.3;
-        box.rotation.y = -0.5;
-        box.position.x = 5;
+        const earthOrbitSpeed
+        earthOrbitAngle += earthOrbitSpeed; //advance angle in degrees
+        var orbitAngleInRadians = earthOrbitAngle * Math.PI / 180; //convert to radians
+
+        //update position of earth...
+        
         
         let startTime = performance.now()	//calculate start time 
-        let tickSpeed = 2; //increment per 1 second
+        let tickSpeed = 2; //increment per x second
        
         let t = 0;
         let seconds = 0;
@@ -59,6 +68,8 @@
                 console.log("update tick at second xx " + seconds);
                 startTime = performance.now()
                 sphere.rotation.x = t 
+                earth.position.x = Math.cos(orbitAngleInRadians) * earthOrbitRadius; 
+                earth.position.z = Math.sin(orbitAngleInRadians) * earthOrbitRadius;
             }
 
             t += 0.1
