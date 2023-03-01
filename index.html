@@ -21,6 +21,7 @@
     <script>
         const canvas = document.getElementById("render-canvas");
         /* all our JavaScript code goes here */
+        /*
         var engine = new BABYLON.Engine(canvas);
         var scene = new BABYLON.Scene(engine);
 
@@ -75,12 +76,57 @@
             t += 0.1
             box.rotation.y = t * 0.1;
         }
+        */
+            // create the Babylon scene
+            var engine = new BABYLON.Engine(canvas, true);
+            var scene = new BABYLON.Scene(engine);
+
+            // create the camera
+            var camera = new BABYLON.ArcRotateCamera('camera', -Math.PI / 2, Math.PI / 4, 100, BABYLON.Vector3.Zero(), scene);
+            camera.attachControl(canvas, true);
+
+            // create the sun
+            var sunMaterial = new BABYLON.StandardMaterial('sunMaterial', scene);
+            sunMaterial.emissiveTexture = new BABYLON.Texture('https://cdn.babylonjs.com/textures/sun.jpg', scene);
+            sunMaterial.emissiveColor = new BABYLON.Color3(1, 1, 1);
+            var sun = BABYLON.MeshBuilder.CreateSphere('sun', { diameter: 20 }, scene);
+            sun.material = sunMaterial;
+
+            // create the earth
+            var earthMaterial = new BABYLON.StandardMaterial('earthMaterial', scene);
+            earthMaterial.diffuseTexture = new BABYLON.Texture('https://cdn.babylonjs.com/textures/earth.jpg', scene);
+            var earth = BABYLON.MeshBuilder.CreateSphere('earth', { diameter: 10 }, scene);
+            earth.material = earthMaterial;
+
+            // create the moon
+            var moonMaterial = new BABYLON.StandardMaterial('moonMaterial', scene);
+            moonMaterial.diffuseTexture = new BABYLON.Texture('https://cdn.babylonjs.com/textures/moon.jpg', scene);
+            var moon = BABYLON.MeshBuilder.CreateSphere('moon', { diameter: 5 }, scene);
+            moon.material = moonMaterial;
+
+            // create the orbits
+            var sunOrbit = BABYLON.MeshBuilder.CreateDashedLines('sunOrbit', { points: [BABYLON.Vector3.Zero(), new BABYLON.Vector3(0, 0, 50)], dashSize: 2, gapSize: 1 }, scene);
+            var earthOrbit = BABYLON.MeshBuilder.CreateDashedLines('earthOrbit', { points: [sun.position, new BABYLON.Vector3(0, 0, 30)], dashSize: 2, gapSize: 1 }, scene);
+            var moonOrbit = BABYLON.MeshBuilder.CreateDashedLines('moonOrbit', { points: [earth.position, new BABYLON.Vector3(0, 0, 10)], dashSize: 2, gapSize: 1 }, scene);
+
+            // set up the animation loop
+            var alpha = 0;
+            engine.runRenderLoop(function () {
+                alpha += 0.01;
+                earth.position.x = 30 * Math.cos(alpha);
+                earth.position.z = 30 * Math.sin(alpha);
+                moon.position.x = earth.position.x + 10 * Math.cos(alpha * 5);
+                moon.position.z = earth.position.z + 10 * Math.sin(alpha * 5);
+                moon.rotation.y += 0.01;
+                scene.render();
+
+
         
-        function renderLoop(){
-            scene.render();
-        }
+        //function renderLoop(){
+        //    scene.render();
+        //}
         //not sure how these 2 interact.
-        scene.registerBeforeRender(updateGame) //render only for specific scene but before every render i guess not sure
+        //scene.registerBeforeRender(updateGame) //render only for specific scene but before every render i guess not sure
            
         engine.runRenderLoop(renderLoop); //continously render whatever you need to i guess
 
