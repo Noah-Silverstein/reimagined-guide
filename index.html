@@ -17,6 +17,8 @@
   </head>
   <body>
     <script src="babylon.js"></script>
+    <script src="test.js"></script>
+
     <canvas id="render-canvas"></canvas>
     <script>
         const canvas = document.getElementById("render-canvas");
@@ -54,13 +56,14 @@
 
         let startTime = performance.now();
         let tickSpeed = 1
+        let date = Date.now()
         function gameLoop(){
             currentTime = performance.now()
             let ellapsedTime = (currentTime - startTime) / 1000
             if (ellapsedTime >= tickSpeed){
                 //here is where you want to put the game logic that increments per second
                 ++seconds
-                console.log("update tick at second xx " + seconds);
+                console.log("update tick at " + seconds + " | version: " + date  );
                 startTime = performance.now()
             }
         }
@@ -70,8 +73,8 @@
         //update celestial body positions and render to canvas
         function renderLoop(){
             alpha += 0.01;
-            earth.position.x = 60 * Math.cos(alpha);
-            earth.position.z = 60 * Math.sin(alpha);
+            earth.position.x = sun.position.x + earthOrbitLength * Math.cos(alpha);
+            earth.position.z = sun.position.y + earthOrbitLength * Math.sin(alpha);
             moon.position.x = earth.position.x + 10 * Math.cos(alpha * 5);
             moon.position.z = earth.position.z + 10 * Math.sin(alpha * 5);
             moon.rotation.y += 0.01;
@@ -82,7 +85,13 @@
         engine.runRenderLoop(renderLoop)
 
         //not sure how these 2 interact.
-        //scene.registerBeforeRender(updateGame) //render only for specific scene but before every render i guess not sure
+        //not sure how the scene is different from the engine but I can use this function to
+        //only update the game logic every seconds since this is a function that's called BEFORE every
+        //render. Just use the same time constraint thing as in the above game loop. There's also an option to
+        //register AFTER render. 
+        //for the simulation you probably want to update 30times per second (aka 30fps)
+        //for the updating of resources you'll want to do that once per second
+        scene.registerBeforeRender(gameLoop) //render only for specific scene but before every render i guess not sure
            
         engine.runRenderLoop(renderLoop); //continously render whatever you need to i guess
 

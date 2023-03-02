@@ -18,7 +18,6 @@ class Deposit extends Resource{
     }
 }
 
-
 //contains orbital positional information
 class Orbit {
     constructor(orbitLength, orbitSpeed){
@@ -30,15 +29,13 @@ class Orbit {
 
 // 
 class CelestialBody {
-    constructor(name, size, crustResources, orbit, axialTilt){
+    constructor(name, size, orbit, axialTilt, satellites){
       this.name = name;
       this.size = size;
-      this.moons = moons;
       this.orbit = orbit;
       this.axialTilt = axialTilt;
-      this.crustResources = crustResources;
-      this.mantleResources = mantleResources;
-      this.coreResources = coreResources;
+      this.satellites = satellites;
+      
     }
     logCelestialBody(){
         console.log(this.name + " " + this.size)
@@ -48,22 +45,28 @@ class CelestialBody {
     }
 }
 
+class Sun extends CelestialBody{
+    constructor(name, size, orbit, axialTilt, satellites){
+        super(name, size, orbit, axialTilt, satellites);
+    }
+}
+
 class Planet extends CelestialBody {
-    constructor(name, size, crustResources, orbit, axialTilt, moons){
-        super(name, size, crustResources, orbit, axialTilt);
-        this.moons = moons;
+    constructor(name, size, orbit, axialTilt, satellites){
+        super(name, size, orbit, axialTilt, satellites);
     }
 }
 
 class Moon extends CelestialBody {
-    constructor(name, size, crustResources, orbit, axialTilt){
-        super(name, size, crustResources, orbit, axialTilt);
+    constructor(name, size, orbit, axialTilt, satellites){
+        super(name, size, orbit, axialTilt, satellites);
     }
 }
 
 
-module.export = {
+module.exports = {
     Planet, 
     Moon,
+    Sun,
     Orbit
 }
