@@ -19,33 +19,51 @@ class Deposit extends Resource{
 }
 
 
-//ores that exist 
-class Planet {
-    //size in km, 
-    constructor(name, size, crustResources, mantleResources, coreResources){
+//contains orbital positional information
+class Orbit {
+    constructor(orbitLength, orbitSpeed){
+        this.orbitLength = orbitLength;
+        this.orbitSpeed = orbitSpeed;
+    }
+}
+
+
+// 
+class CelestialBody {
+    constructor(name, size, crustResources, orbit, axialTilt){
       this.name = name;
       this.size = size;
+      this.moons = moons;
+      this.orbit = orbit;
+      this.axialTilt = axialTilt;
       this.crustResources = crustResources;
       this.mantleResources = mantleResources;
       this.coreResources = coreResources;
     }
-    logPlanet(){
+    logCelestialBody(){
         console.log(this.name + " " + this.size)
         this.crustResources.forEach(el => {
             console.log(el.element.name + " ")
         });
     }
-  }
-
-
-function planetGenerator(name, n){
-    //generate random available harvestable resources
-    const harvestableElements = getRandomElements(alphaElementsArray, n);
-    const planetDeposits = harvestableElements.map(el => new Deposit(getRndInteger(1000, 1e6), el));
-    return new Planet(name, getRndInteger(1e6, 1e12),planetDeposits, [], [])
 }
 
-var bearth = planetGenerator("bearth", 5);
-console.log(bearth.crustResources);
-bearth.logPlanet()
+class Planet extends CelestialBody {
+    constructor(name, size, crustResources, orbit, axialTilt, moons){
+        super(name, size, crustResources, orbit, axialTilt);
+        this.moons = moons;
+    }
+}
 
+class Moon extends CelestialBody {
+    constructor(name, size, crustResources, orbit, axialTilt){
+        super(name, size, crustResources, orbit, axialTilt);
+    }
+}
+
+
+module.export = {
+    Planet, 
+    Moon,
+    Orbit
+}
