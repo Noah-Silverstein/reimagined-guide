@@ -17,7 +17,7 @@
   </head>
   <body>
     <script src="babylon.js"></script>
-    <script src="test.js"></script>
+    <script src="main.js"></script> 
 
     <canvas id="render-canvas"></canvas>
     <script>
@@ -76,8 +76,8 @@
             alpha += 0.01;
             earth.position.x = sun.position.x + earthOrbitLength * Math.cos(alpha);
             earth.position.z = sun.position.y + earthOrbitLength * Math.sin(alpha);
-            moon.position.x = earth.position.x + 10 * Math.cos(alpha * 5);
-            moon.position.z = earth.position.z + 10 * Math.sin(alpha * 5);
+            moon.position.x = earth.position.x + lunarOrbitLength * Math.cos(alpha * 5);
+            moon.position.z = earth.position.z + lunarOrbitLength * Math.sin(alpha * 5);
             moon.rotation.y += 0.01;
             scene.render();
             
@@ -90,6 +90,8 @@
         //register AFTER render. 
         //for the simulation you probably want to update 30times per second (aka 30fps)
         //for the updating of resources you'll want to do that once per second
+        //so positional updates you probably want to do as often as posible right but you still want to keep it 
+        //independant from the renderer so maybe update 30times per second
         scene.registerBeforeRender(gameLoop) //render only for specific scene but before every render i guess not sure
            
         engine.runRenderLoop(renderLoop); //continously render whatever you need to i guess

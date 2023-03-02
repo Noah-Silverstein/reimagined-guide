@@ -16,6 +16,8 @@ function createBabylonCelestialBody(scene, body, materialInfo){
     return babylonCelestialBody;
 }
 
+let terra = new Planet("terra", 10, new Orbit(50, 1), 0, [])
+let sol = new Sun("sol", 30, new Orbit(0, 0), 0, [])
 
 
 //renders planets and their moons 
