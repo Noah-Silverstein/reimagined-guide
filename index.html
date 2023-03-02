@@ -17,7 +17,8 @@
   </head>
   <body>
     <script src="babylon.js"></script>
-    
+    <script src="test.js"></script>
+
     <canvas id="render-canvas"></canvas>
     <script>
         const canvas = document.getElementById("render-canvas");
@@ -73,8 +74,8 @@
         //update celestial body positions and render to canvas
         function renderLoop(){
             alpha += 0.01;
-            earth.position.x = sun.position.x + 30 * Math.cos(alpha);
-            earth.position.z = sun.position.y + 30 * Math.sin(alpha);
+            earth.position.x = sun.position.x + earthOrbitLength * Math.cos(alpha);
+            earth.position.z = sun.position.y + earthOrbitLength * Math.sin(alpha);
             moon.position.x = earth.position.x + 10 * Math.cos(alpha * 5);
             moon.position.z = earth.position.z + 10 * Math.sin(alpha * 5);
             moon.rotation.y += 0.01;
